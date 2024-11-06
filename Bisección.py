@@ -1,6 +1,8 @@
 import numpy as np
-import RungeKutta4
 
+import RungeKutta
+
+#VOLVER A HACER CON SECANTES
 # Constantes
 G = 6.67430e-11  # Constante gravitacional (m^3 kg^-1 s^-2)
 M = 5.972e24  # Masa de la Tierra (kg)
@@ -16,6 +18,7 @@ def sistema_ecuaciones(t, estado):
     dvthetadt = -vr * vtheta / r
     return np.array([drdt, dthetadt, dvrdt, dvthetadt])
 
+
 def simular_trayectoria(velocidad_inicial, h=50, num_steps=10000):
     # Condiciones iniciales
     r0 = 415000000  # Posición radial inicial del satélite (m)
@@ -25,7 +28,7 @@ def simular_trayectoria(velocidad_inicial, h=50, num_steps=10000):
     estado_inicial = np.array([r0, theta0, vr0, vtheta0])
 
     # Ejecutar la simulación hasta la posición angular del asteroide
-    estado_final = RungeKutta4.runge_kutta_4(sistema_ecuaciones, 0, estado_inicial, h, num_steps)
+    estado_final = RungeKutta.runge_kutta_4(sistema_ecuaciones, 0, estado_inicial, h, num_steps)
     return estado_final
 
 
